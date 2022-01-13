@@ -2,7 +2,6 @@ import BookArticle from "./BookArticle";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBooks } from "../../Redux/Books/bookActions";
 import { useEffect } from "react";
-import BookPageInput from "./BookPageInput";
 import Loading from "../Presentational/Loading";
 import {
   nextPage,
@@ -28,21 +27,17 @@ const BookContainer = () => {
     return <h2>{error}</h2>;
   }
 
-  if (loading) {
-    return <Loading />;
-  }
-
   const handlePageChange = (operator) => {
     switch (operator) {
       case "next":
         dispatch(nextPage());
         break;
       case "previous":
-        // if (page <= 2) {
-        //   setPage(1);
-        // } else {
-        dispatch(previousPage());
-        // }
+        if (page <= 2) {
+          break;
+        } else {
+          dispatch(previousPage());
+        }
         break;
       default:
         dispatch(nextPage());
@@ -50,31 +45,40 @@ const BookContainer = () => {
   };
 
   return (
-    <>
-      <BookPageInput />
-      <button
-        onClick={() => {
-          handlePageChange("previous");
-        }}
-      >
-        Previous page
-      </button>
+    <main className="main-content">
+      <div className="pagination">
+        <div className="pagination__controls">
+          <button
+            onClick={() => {
+              handlePageChange("previous");
+            }}
+          >
+            Previous page
+          </button>
 
-      <button
-        onClick={() => {
-          handlePageChange("next");
-        }}
-      >
-        next page
-      </button>
-      {/* <h2>Page {page}</h2> */}
+          <button
+            onClick={() => {
+              handlePageChange("next");
+            }}
+          >
+            next page
+          </button>
+        </div>
+        <div className="pagination__info">
+          <p>Displaying: page {page}</p>
+        </div>
+      </div>
+
       <section className="books-container">
-        {bookList &&
+        {loading ? (
+          <Loading />
+        ) : (
           bookList.map((books) => {
             return <BookArticle books={books} key={books.id} />;
-          })}
+          })
+        )}
       </section>
-    </>
+    </main>
   );
 };
 
