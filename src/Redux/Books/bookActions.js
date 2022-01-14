@@ -32,7 +32,11 @@ export const fetchBooks = (api) => {
       .get(api)
       .then((response) => {
         const books = response.data.results;
-        dispatch(fetchBooksSuccess(books));
+        if (books.length === 0) {
+          dispatch(fetchBooksFailure("no results"));
+        } else {
+          dispatch(fetchBooksSuccess(books));
+        }
       })
       .catch((error) => {
         const errorMessage = error.message;

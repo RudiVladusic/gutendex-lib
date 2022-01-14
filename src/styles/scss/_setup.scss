@@ -18,7 +18,8 @@ html {
 
 img {
   max-width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   display: block;
+  filter: drop-shadow(0 0 0.15em black);
 }

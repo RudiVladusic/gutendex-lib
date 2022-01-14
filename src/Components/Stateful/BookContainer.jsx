@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchBooks } from "../../Redux/Books/bookActions";
 import { useEffect } from "react";
 import Loading from "../Presentational/Loading";
+import React from "react";
 import {
   nextPage,
   previousPage,
 } from "../../Redux/Pagination/paginationActions";
-const BookContainer = () => {
+
+const BookContainer = React.memo(() => {
   const dispatch = useDispatch();
   const bookList = useSelector((state) => state.book.books);
   const error = useSelector((state) => state.book.error);
@@ -16,9 +18,6 @@ const BookContainer = () => {
 
   const apiString = `https://gutendex.com/books/?page=${page}`;
   useEffect(() => {
-    // setTimeout(() => {
-    //   dispatch(fetchBooks(apiString));
-    // }, 2000);
     dispatch(fetchBooks(apiString));
     //  eslint-disable-next-line
   }, [page]);
@@ -33,7 +32,7 @@ const BookContainer = () => {
         dispatch(nextPage());
         break;
       case "previous":
-        if (page <= 2) {
+        if (page <= 1) {
           break;
         } else {
           dispatch(previousPage());
@@ -80,6 +79,6 @@ const BookContainer = () => {
       </section>
     </main>
   );
-};
+});
 
 export default BookContainer;

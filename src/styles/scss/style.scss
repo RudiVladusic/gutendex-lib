@@ -1,8 +1,10 @@
-@import "loading";
-@import "keyframes";
-@import "setup";
 @import "variables";
+@import "keyframes";
 @import "body";
+@import "loading";
+@import "setup";
+@import "nav";
+@import "book-info";
 
 .main-content {
   width: $baseline-width;
@@ -43,7 +45,7 @@
   gap: 2em;
   grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
   place-items: center;
-  justify-content: center;
+  // justify-content: center;
   padding: 1em;
   margin: 0 auto;
 
@@ -56,6 +58,8 @@
     gap: 0.5em;
     place-items: center;
     text-align: center;
+    height: 20em;
+
     h3,
     h4 {
       font-weight: 400;

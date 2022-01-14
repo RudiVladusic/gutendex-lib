@@ -1,0 +1,47 @@
+.book-info {
+  width: $baseline-width;
+  margin: 0 auto;
+
+  &__wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1em;
+    place-items: start center;
+    padding: 1em;
+  }
+
+  &__image {
+    flex: 0 1 20em;
+  }
+
+  &__subjects {
+    max-width: 60ch;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.5em;
+
+    &--title {
+      font-weight: 600;
+    }
+  }
+
+  aside {
+    flex: 1 1 30em;
+    display: grid;
+    gap: 2em;
+    grid-template-columns: repeat(1, 1fr);
+    place-items: center start;
+  }
+
+  &__read-online {
+    a {
+      text-decoration: none;
+      color: $dark-jungle-green;
+      border: 0.15em solid $yellow-orange;
+      padding: 0.25em 0.5em;
+      border-radius: 0.5em;
+      cursor: pointer;
+      text-transform: lowercase;
+    }
+  }
+}

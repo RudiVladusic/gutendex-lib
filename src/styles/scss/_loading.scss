@@ -2,7 +2,7 @@
   width: 5em;
   height: 5em;
   border-radius: 50%;
-  border: 0.15em solid red;
+  border: 0.15em solid $dark-jungle-green;
   animation: loading-animation 0.5s linear infinite;
-  border-right: 0.15em solid blue;
+  border-right: 0.15em solid $yellow-orange;
 }
