@@ -30,7 +30,7 @@ const SingleBook = () => {
           const { name, birth_year, death_year } = info;
           return (
             <h3 key={name}>
-              Author: {name}{" "}
+              <span className="book-info__title--title">Author:</span> {name}
               <span>{`${birth_year} - ${death_year} (age ${
                 death_year - birth_year
               })`}</span>
@@ -46,8 +46,9 @@ const SingleBook = () => {
   const LanguagesInfo = () => {
     return languages ? (
       <div className="book-info__languages">
+        <span className="book-info__title--title">Languages:</span>
         {languages.map((lang) => {
-          return <p key={lang}>Languages: {lang}</p>;
+          return <p key={lang}>{lang}</p>;
         })}
       </div>
     ) : (
@@ -58,7 +59,7 @@ const SingleBook = () => {
   const SubjectsInfo = () => {
     return subjects ? (
       <div className="book-info__subjects">
-        <span className="book-info__subjects--title">Subjects:</span>
+        <span className="book-info__title--title">Subjects:</span>
         {subjects.map((subj) => {
           return <span key={subj}>{subj}</span>;
         })}

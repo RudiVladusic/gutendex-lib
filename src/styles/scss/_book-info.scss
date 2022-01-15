@@ -2,6 +2,23 @@
   width: $baseline-width;
   margin: 0 auto;
 
+  &__title {
+    &--title {
+      font-weight: 600;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        height: 0.1em;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(to left, $white, $yellow-orange);
+      }
+    }
+  }
+
   &__wrapper {
     display: flex;
     flex-flow: row wrap;
@@ -19,10 +36,6 @@
     display: flex;
     flex-flow: row wrap;
     gap: 0.5em;
-
-    &--title {
-      font-weight: 600;
-    }
   }
 
   aside {

@@ -22,7 +22,10 @@ const BookArticle = ({ books }) => {
       ) : (
         <img src={formats["image/jpeg"]} alt="book cover" />
       )}
-      <Link to={`/books/${id}`}>Details</Link>
+      <div className="books-container__article--details">
+        <Link to={`/books/${id}`}>Details</Link>
+        <a href={formats["text/html"]}>Read online</a>
+      </div>
     </article>
   );
 };
