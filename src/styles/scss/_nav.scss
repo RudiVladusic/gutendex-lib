@@ -12,7 +12,7 @@ nav {
   display: flex;
   gap: 2em;
   width: $baseline-width;
-  border: 0.1em solid red;
+  // border: 0.1em solid red;
   margin: 0 auto;
   padding: 0 1em;
   justify-content: space-between;
@@ -75,6 +75,26 @@ nav {
 
   a {
     text-decoration: none;
+    position: relative;
+    color: $dark-jungle-green;
+    cursor: pointer;
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      content: "";
+      width: 0;
+      height: 0.15em;
+      background: linear-gradient(to right, $yellow-orange, $white);
+      transition: width 0.25s ease-in-out;
+      border-radius: 9999em;
+    }
+
+    &:hover {
+      &::after {
+        width: 100%;
+      }
+    }
   }
 }
 

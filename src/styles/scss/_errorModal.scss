@@ -1,0 +1,17 @@
+.error-modal {
+  p {
+    position: relative;
+    max-width: max-content;
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 0.1em;
+      background: $vivid-burgundy;
+      left: 0;
+      bottom: 0;
+      animation: underline 0.5s ease-in forwards 0.25s;
+    }
+  }
+}

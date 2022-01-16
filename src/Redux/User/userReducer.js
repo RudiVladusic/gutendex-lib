@@ -2,14 +2,16 @@ import { saveToLocal } from "../../Functions/saveToLocal";
 import validate from "../../Functions/validateLogin";
 import {
   LOGIN_ATTEMPT,
-  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
   LOGOUT,
+  REGISTER_FAILURE,
   REGISTER_USER,
 } from "./userTypes";
 
 const checkForUser = JSON.parse(localStorage.getItem("userAccount"));
 const initialState = {
-  isError: false,
+  isLoginError: false,
+  isRegisterError: false,
   isLoggedIn: false,
   credentials: checkForUser || {
     username: undefined,
@@ -23,6 +25,7 @@ const userReducer = (state = initialState, action) => {
       saveToLocal("userAccount", action.payload);
       return {
         ...state,
+        isLoggedIn: true,
         credentials: {
           username: action.payload.username,
           password: action.payload.password,
@@ -30,11 +33,23 @@ const userReducer = (state = initialState, action) => {
       };
     case LOGIN_ATTEMPT:
       const checkLogin = validate(state.credentials, action.payload);
-      console.log(checkLogin);
       return {
         ...state,
         isLoggedIn: checkLogin,
+        isLoginError: checkLogin ? false : true,
       };
+    case REGISTER_FAILURE:
+      return {
+        ...state,
+        isRegisterError: true,
+      };
+
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        isLoginError: true,
+      };
+
     case LOGOUT:
       return {
         ...state,

@@ -1,16 +1,14 @@
-import React, { useEffect } from "react";
 import SearchComponent from "../Stateful/SearchComponent";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../Redux/User/userActions";
-import { useNavigate } from "react-router-dom";
+
 const Navigation = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const isLogged = useSelector((state) => state.user.isLoggedIn);
   const userName = useSelector((state) => state.user.credentials.username);
   const dispatch = useDispatch();
-  let navigate = useNavigate();
 
   return (
     <nav>
@@ -24,12 +22,9 @@ const Navigation = () => {
           <Link to="/about">About</Link>
           <Link to="/favorites">Favorites</Link>
           <Link
-            to="/login"
+            to={isLogged ? "/" : "/login"}
             onClick={() => {
-              if (isLogged) {
-                navigate("/");
-                dispatch(logout());
-              }
+              isLogged && dispatch(logout());
             }}
           >
             {isLogged ? `Logout (${userName})` : "Login"}

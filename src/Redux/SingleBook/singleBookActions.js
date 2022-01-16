@@ -32,7 +32,6 @@ export const fetchSingleBook = (api) => {
       .get(api)
       .then((response) => {
         const book = response.data.results;
-        // console.log(book);
         dispatch(fetchSingleBookSuccess(book));
       })
       .catch((error) => {

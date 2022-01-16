@@ -5,6 +5,7 @@
 @import "setup";
 @import "nav";
 @import "book-info";
+@import "errorModal";
 
 .main-content {
   width: $baseline-width;
@@ -55,10 +56,10 @@
     padding: 0.5em;
     box-shadow: 0.15em 0.1em 0.25em rgba(0, 0, 0, 0.5);
     display: grid;
-    gap: 0.5em;
+    gap: 1em;
     place-items: center;
     text-align: center;
-    height: 20em;
+    height: 25em;
 
     h3,
     h4 {
@@ -69,7 +70,7 @@
     a {
       text-decoration: none;
       color: $dark-jungle-green;
-      padding: 0.25em 0.5em;
+      padding: 0.25em 0.75em;
       border: 0.15em solid $yellow-orange;
       border-radius: 0.5em;
       text-transform: lowercase;

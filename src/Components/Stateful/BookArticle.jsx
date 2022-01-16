@@ -24,7 +24,13 @@ const BookArticle = ({ books }) => {
       )}
       <div className="books-container__article--details">
         <Link to={`/books/${id}`}>Details</Link>
-        <a href={formats["text/html"]}>Read online</a>
+        <a
+          href={formats["text/html"]}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Read online
+        </a>
       </div>
     </article>
   );
