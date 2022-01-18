@@ -46,6 +46,12 @@
     place-items: center start;
   }
 
+  &__user-actions-group {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1em;
+  }
+
   &__read-online {
     a {
       text-decoration: none;

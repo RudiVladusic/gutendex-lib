@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Loading from "../Presentational/Loading";
 import { fetchSingleBook } from "../../Redux/SingleBook/singleBookActions";
-
+import { addToFavorites } from "../../Redux/User/userActions";
 const SingleBook = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -93,8 +93,26 @@ const SingleBook = () => {
             <div className="book-info__download-count">
               <p>Downloads: {download_count && download_count}</p>
             </div>
-            <div className="book-info__read-online">
-              {formats && <a href={formats["text/html"]}>Read online</a>}
+            <div className="book-info__user-actions-group">
+              <div className="book-info__read-online">
+                {formats && (
+                  <a
+                    href={formats["text/html"]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Read online
+                  </a>
+                )}
+              </div>
+              <div
+                className="book-info__add-to-favorites"
+                onClick={() => {
+                  dispatch(addToFavorites(id));
+                }}
+              >
+                Add to favorites
+              </div>
             </div>
           </aside>
         </div>

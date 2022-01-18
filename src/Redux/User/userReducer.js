@@ -1,6 +1,7 @@
 import { saveToLocal } from "../../Functions/saveToLocal";
 import validate from "../../Functions/validateLogin";
 import {
+  ADD_TO_FAVORITES,
   LOGIN_ATTEMPT,
   LOGIN_FAILURE,
   LOGOUT,
@@ -17,6 +18,7 @@ const initialState = {
     username: undefined,
     password: undefined,
   },
+  favorites: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -55,6 +57,12 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: false,
       };
+    case ADD_TO_FAVORITES: {
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
+      };
+    }
     default:
       return state;
   }

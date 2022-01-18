@@ -1,4 +1,5 @@
 import {
+  ADD_TO_FAVORITES,
   LOGIN_ATTEMPT,
   LOGIN_FAILURE,
   LOGOUT,
@@ -35,5 +36,12 @@ export const registerFailure = () => {
 export const loginFailure = () => {
   return {
     type: LOGIN_FAILURE,
+  };
+};
+
+export const addToFavorites = (id) => {
+  return {
+    type: ADD_TO_FAVORITES,
+    payload: id,
   };
 };

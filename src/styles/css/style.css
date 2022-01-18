@@ -35,7 +35,6 @@
 body {
   background: #fbfffe;
   font-size: clamp(0.85em, 1.5vw, 1.1em);
-  padding: 3em 0;
 }
 
 .loading-spinner {
@@ -271,6 +270,17 @@ nav {
   place-items: center start;
 }
 
+.book-info__user-actions-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  gap: 1em;
+}
+
 .book-info__read-online a {
   text-decoration: none;
   color: #001514;
@@ -286,6 +296,7 @@ nav {
   max-width: -webkit-max-content;
   max-width: -moz-max-content;
   max-width: max-content;
+  color: #fbfffe;
 }
 
 .error-modal p::after {
@@ -293,16 +304,106 @@ nav {
   content: "";
   width: 0;
   height: 0.1em;
-  background: #a61c3c;
+  background: #fbfffe;
   left: 0;
   bottom: 0;
   -webkit-animation: underline 0.5s ease-in forwards 0.25s;
           animation: underline 0.5s ease-in forwards 0.25s;
 }
 
+.form-wrapper {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  width: clamp(30vw, 40em, 95vw);
+  position: relative;
+}
+
+.form-wrapper form {
+  display: -ms-grid;
+  display: grid;
+  gap: 2em;
+  place-items: start center;
+  width: 100%;
+  padding: 5em 0;
+}
+
+.form-wrapper .form-group {
+  display: -ms-grid;
+  display: grid;
+  gap: 0.5em;
+  padding: 0.5em;
+  width: 80%;
+}
+
+.form-wrapper .form-group:focus-within label {
+  color: #f4ac45;
+}
+
+.form-wrapper label {
+  color: #fbfffe;
+  font-size: inherit;
+  -webkit-transition: color 0.25s ease-in-out;
+  transition: color 0.25s ease-in-out;
+}
+
+.form-wrapper .form-image {
+  width: 100%;
+  height: 15em;
+  display: none;
+}
+
+.form-wrapper input {
+  font-size: inherit;
+  border: none;
+  border-radius: 0.15em;
+  outline: 0.15em solid #fbfffe;
+  background: #fbfffe;
+  color: #001514;
+  padding: 1em 0.5em;
+  -webkit-transition: outline 0.25s ease-in-out;
+  transition: outline 0.25s ease-in-out;
+}
+
+.form-wrapper button {
+  outline: none;
+  border: none;
+  border-radius: 0.25em;
+  font-size: inherit;
+  text-transform: lowercase;
+  background: #f4ac45;
+  padding: 1em 0.5em;
+  cursor: pointer;
+  color: #fbfffe;
+}
+
+.login-form {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("/src/Images/login-form-bg.jpg") no-repeat center center/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/Images/login-form-bg.jpg") no-repeat center center/cover;
+}
+
+.register-form {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("/src/Images/register-form-bg.jpg") no-repeat center center/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/Images/register-form-bg.jpg") no-repeat center center/cover;
+}
+
+.account-modal {
+  padding: 0.5em;
+}
+
+.account-modal p {
+  color: #fbfffe;
+}
+
+.account-modal a {
+  text-decoration: none;
+  color: #f4ac45;
+}
+
 .main-content {
   width: clamp(80vw, 50em, 93vw);
   margin: 0 auto;
+  padding: 5em 0;
 }
 
 .pagination__controls {
@@ -335,10 +436,34 @@ nav {
   padding: 0 0.5em;
 }
 
+.app-main {
+  padding: 5em 0;
+  min-height: 20em;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.register {
+  position: relative;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("/src/Images/register-form-bg.jpg") no-repeat center center/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/Images/register-form-bg.jpg") no-repeat center center/cover;
+}
+
+.register::before {
+  position: absolute;
+  content: "";
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
 .books-container {
   display: -ms-grid;
   display: grid;
-  gap: 2em;
+  gap: 3em;
   -ms-grid-columns: (minmax(15em, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
   place-items: center;
@@ -349,8 +474,8 @@ nav {
 .books-container__article {
   width: 100%;
   padding: 0.5em;
-  -webkit-box-shadow: 0.15em 0.1em 0.25em rgba(0, 0, 0, 0.5);
-          box-shadow: 0.15em 0.1em 0.25em rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0.15em 0.1em 0.25em rgba(0, 0, 0, 0.2);
+          box-shadow: 0.15em 0.1em 0.25em rgba(0, 0, 0, 0.2);
   display: -ms-grid;
   display: grid;
   gap: 1em;
