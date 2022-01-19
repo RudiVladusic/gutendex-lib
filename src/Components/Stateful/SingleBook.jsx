@@ -1,10 +1,13 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Loading from "../Presentational/Loading";
 import { fetchSingleBook } from "../../Redux/SingleBook/singleBookActions";
-import { addToFavorites } from "../../Redux/User/userActions";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../Redux/User/userActions";
+
 const SingleBook = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -18,7 +21,10 @@ const SingleBook = () => {
     useSelector((state) =>
       state.singleBook.singleBookInfo.find((info) => info.id === Number(id))
     ) || [];
-  console.log(singleBookInfo);
+
+  const isBookFavorited = useSelector((state) =>
+    state.user.favorites.find((ide) => ide.id === Number(id))
+  );
 
   const { title, languages, download_count, subjects, authors, formats } =
     singleBookInfo;
@@ -70,7 +76,7 @@ const SingleBook = () => {
   };
 
   return (
-    <main>
+    <main className="main-content">
       <article className="book-info">
         <div className="book-info__wrapper">
           {formats ? (
@@ -108,10 +114,12 @@ const SingleBook = () => {
               <div
                 className="book-info__add-to-favorites"
                 onClick={() => {
-                  dispatch(addToFavorites(id));
+                  isBookFavorited
+                    ? dispatch(removeFromFavorites(singleBookInfo))
+                    : dispatch(addToFavorites(singleBookInfo));
                 }}
               >
-                Add to favorites
+                {isBookFavorited ? `Remove from favorites` : `Add to favorites`}
               </div>
             </div>
           </aside>

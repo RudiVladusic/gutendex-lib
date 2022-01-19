@@ -23,7 +23,6 @@ const Register = () => {
   return (
     <main className="app-main register">
       <div className="form-wrapper register-form">
-        <div className="form-image register-form"></div>
         <form
           onSubmit={(e) => {
             e.preventDefault();

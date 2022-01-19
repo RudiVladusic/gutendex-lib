@@ -8,6 +8,7 @@ import {
   nextPage,
   previousPage,
 } from "../../Redux/Pagination/paginationActions";
+import ErrorModal from "../Presentational/ErrorModal";
 
 const BookContainer = React.memo(() => {
   const dispatch = useDispatch();
@@ -21,10 +22,6 @@ const BookContainer = React.memo(() => {
     dispatch(fetchBooks(apiString));
     //  eslint-disable-next-line
   }, [page]);
-
-  if (error) {
-    return <h2>{error}</h2>;
-  }
 
   const handlePageChange = (operator) => {
     switch (operator) {
@@ -71,6 +68,8 @@ const BookContainer = React.memo(() => {
       <section className="books-container">
         {loading ? (
           <Loading />
+        ) : error ? (
+          <ErrorModal errorMessage={`Not found`} />
         ) : (
           bookList.map((books) => {
             return <BookArticle books={books} key={books.id} />;

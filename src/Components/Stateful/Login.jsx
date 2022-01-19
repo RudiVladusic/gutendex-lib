@@ -26,7 +26,6 @@ const Login = () => {
   return (
     <main className="app-main login">
       <div className="form-wrapper login-form">
-        <div className="form-image login-form"></div>
         <form
           onSubmit={(e) => {
             e.preventDefault();

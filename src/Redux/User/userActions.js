@@ -5,6 +5,7 @@ import {
   LOGOUT,
   REGISTER_FAILURE,
   REGISTER_USER,
+  REMOVE_FROM_FAVORITES,
 } from "./userTypes";
 
 export const loginAttempt = (userInfo) => {
@@ -39,9 +40,16 @@ export const loginFailure = () => {
   };
 };
 
-export const addToFavorites = (id) => {
+export const addToFavorites = (item) => {
   return {
     type: ADD_TO_FAVORITES,
-    payload: id,
+    payload: item,
+  };
+};
+
+export const removeFromFavorites = (item) => {
+  return {
+    type: REMOVE_FROM_FAVORITES,
+    payload: item,
   };
 };

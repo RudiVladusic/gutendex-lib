@@ -7,6 +7,7 @@ import NotFound from "./Components/Presentational/NotFound";
 import SingleBook from "./Components/Stateful/SingleBook";
 import Login from "./Components/Stateful/Login";
 import Register from "./Components/Stateful/Register";
+import Favorites from "./Components/Stateful/Favorites";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About />} />
         <Route path="/books/:id" element={<SingleBook />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

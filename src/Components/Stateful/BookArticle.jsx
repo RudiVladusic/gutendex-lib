@@ -2,11 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Loading from "../Presentational/Loading";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { removeFromFavorites } from "../../Redux/User/userActions";
 
-const BookArticle = ({ books }) => {
+const BookArticle = ({ books, removeButton }) => {
   const { title, authors, formats, id } = books;
   const authorName = authors.map((name) => name.name);
-
+  const dispatch = useDispatch();
   const [imageLoading, setImageLoading] = useState(true);
   useEffect(() => {
     const imageLoader = setTimeout(() => setImageLoading(false), 5000);
@@ -32,6 +34,16 @@ const BookArticle = ({ books }) => {
           Read online
         </a>
       </div>
+      {removeButton && (
+        <div
+          className="books-container__article--remove-from-favs"
+          onClick={() => {
+            return dispatch(removeFromFavorites(books));
+          }}
+        >
+          Remove from favs
+        </div>
+      )}
     </article>
   );
 };

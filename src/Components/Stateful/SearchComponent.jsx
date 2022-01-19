@@ -8,14 +8,17 @@ const SearchComponent = () => {
   const apiString = `https://gutendex.com/books/?search=${searchString}`;
   const dispatch = useDispatch();
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        dispatch(fetchBooks(apiString));
-      }}
-    >
-      <input onChange={(e) => setSearchString(e.target.value)} type="text" />
-    </form>
+    <div className="search-form-wrapper">
+      <form
+        className="search-form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(fetchBooks(apiString));
+        }}
+      >
+        <input onChange={(e) => setSearchString(e.target.value)} type="text" />
+      </form>
+    </div>
   );
 };
 

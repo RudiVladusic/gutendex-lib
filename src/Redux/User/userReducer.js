@@ -1,4 +1,6 @@
 import { saveToLocal } from "../../Functions/saveToLocal";
+import { addToFavs } from "../../Functions/addToFavs";
+import { getFromLocal } from "../../Functions/getFromLocal";
 import validate from "../../Functions/validateLogin";
 import {
   ADD_TO_FAVORITES,
@@ -7,9 +9,14 @@ import {
   LOGOUT,
   REGISTER_FAILURE,
   REGISTER_USER,
+  REMOVE_FROM_FAVORITES,
+  GUTENDEX_USER_CREDENTIALS,
+  GUTENDEX_USER_FAVORITES,
 } from "./userTypes";
+import { removeFromFavs } from "../../Functions/removeFromFavs";
 
-const checkForUser = JSON.parse(localStorage.getItem("userAccount"));
+const checkForUser = getFromLocal(GUTENDEX_USER_CREDENTIALS);
+const checkForUserFavs = getFromLocal(GUTENDEX_USER_FAVORITES);
 const initialState = {
   isLoginError: false,
   isRegisterError: false,
@@ -18,13 +25,13 @@ const initialState = {
     username: undefined,
     password: undefined,
   },
-  favorites: [],
+  favorites: checkForUserFavs || [],
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case REGISTER_USER:
-      saveToLocal("userAccount", action.payload);
+      saveToLocal(GUTENDEX_USER_CREDENTIALS, action.payload);
       return {
         ...state,
         isLoggedIn: true,
@@ -57,12 +64,22 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: false,
       };
-    case ADD_TO_FAVORITES: {
+    case ADD_TO_FAVORITES:
+      const newFavoriteAdded = addToFavs(state.favorites, action.payload);
+      saveToLocal(GUTENDEX_USER_FAVORITES, newFavoriteAdded);
       return {
         ...state,
-        favorites: [...state.favorites, action.payload],
+        favorites: newFavoriteAdded,
       };
-    }
+
+    case REMOVE_FROM_FAVORITES:
+      const removeFavorite = removeFromFavs(state.favorites, action.payload);
+      saveToLocal(GUTENDEX_USER_FAVORITES, removeFavorite);
+      return {
+        ...state,
+        favorites: removeFavorite,
+      };
+
     default:
       return state;
   }
