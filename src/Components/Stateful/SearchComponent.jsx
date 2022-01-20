@@ -1,22 +1,61 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchBooks } from "../../Redux/Books/bookActions";
+import { useNavigate } from "react-router-dom";
+import { fetchSearchBooks } from "../../Redux/Search/searchActions";
 
 const SearchComponent = () => {
   const [searchString, setSearchString] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
   const apiString = `https://gutendex.com/books/?search=${searchString}`;
+  const apiStringTopic = `https://gutendex.com/books/?topic=${searchString}`;
+  const [showSearchForm, setShowSearchForm] = useState(false);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   return (
     <div className="search-form-wrapper">
-      <form
-        className="search-form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          dispatch(fetchBooks(apiString));
+      <div
+        className="search-trigger"
+        onClick={() => {
+          setShowSearchForm(!showSearchForm);
         }}
       >
-        <input onChange={(e) => setSearchString(e.target.value)} type="text" />
+        Trigger
+      </div>
+
+      <form
+        className={showSearchForm ? `search-form open-form` : `search-form`}
+        onSubmit={(e) => {
+          e.preventDefault();
+          navigate("/search");
+          if (isChecked) {
+            dispatch(fetchSearchBooks(apiStringTopic));
+          } else {
+            dispatch(fetchSearchBooks(apiString));
+          }
+        }}
+      >
+        <input
+          onChange={(e) => setSearchString(e.target.value)}
+          type="text"
+          value={searchString}
+          placeholder="Search"
+        />
+        <div className="checkbox-topic-container">
+          <label htmlFor="topic">By topic</label>
+          <input
+            type="checkbox"
+            name="search-topic"
+            id="search-topic"
+            disabled={searchString.length === 0 ? true : false}
+            onClick={(e) => {
+              setIsChecked(e.target.checked);
+            }}
+            value={isChecked}
+          />
+        </div>
+        <button>Search</button>
       </form>
     </div>
   );

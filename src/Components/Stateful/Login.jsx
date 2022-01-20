@@ -18,7 +18,7 @@ const Login = () => {
   let navigate = useNavigate();
   useEffect(() => {
     if (isLogged) {
-      navigate("/");
+      navigate(-1);
     }
     //eslint-disable-next-line
   }, [isLogged]);

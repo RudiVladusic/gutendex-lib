@@ -17,6 +17,7 @@ nav {
   padding: 0 1em;
   justify-content: space-between;
   place-items: center;
+  position: relative;
 }
 
 .mobile-navigation {
@@ -103,4 +104,9 @@ nav {
     font-weight: 400;
     font-size: inherit;
   }
+
+  // display: none;
+  // @media (min-width: 786px) {
+  //   display: block;
+  // }
 }

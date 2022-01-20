@@ -99,6 +99,7 @@ nav {
       -ms-flex-pack: justify;
           justify-content: space-between;
   place-items: center;
+  position: relative;
 }
 
 .mobile-navigation {
@@ -433,7 +434,7 @@ nav {
 }
 
 .search-form-wrapper {
-  border: 1px solid red;
+  outline: 0.15em solid #001514;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -441,6 +442,94 @@ nav {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-transition: outline 0.25s ease-in-out;
+  transition: outline 0.25s ease-in-out;
+  padding: 0.25em 0;
+  position: relative;
+}
+
+.search-form-wrapper:focus-within {
+  outline: 0.15em solid #f4ac45;
+}
+
+.search-form-wrapper form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1em;
+  padding: 0 0.5em;
+  position: absolute;
+  top: 200%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  width: clamp(30vw, 15em, 80vw);
+  border: 1px solid red;
+}
+
+.search-form-wrapper .open-form {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.search-form-wrapper input {
+  outline: none;
+  border: none;
+  padding: 0.25em;
+  font-size: inherit;
+}
+
+.search-form-wrapper .checkbox-topic-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.5em;
+  line-height: 1.1;
+  place-items: center;
+}
+
+.search-form-wrapper .checkbox-topic-container input {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  outline: 0.15em solid #f4ac45;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 1em;
+  height: 1em;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.search-form-wrapper .checkbox-topic-container input:checked {
+  background: #f4ac45;
+  padding: 0.5em;
+}
+
+.search-form-wrapper .checkbox-topic-container input:disabled {
+  cursor: not-allowed;
+  outline: 0.15em solid rgba(0, 0, 0, 0.25);
+}
+
+.search-form-wrapper button {
+  outline: none;
+  border: none;
+  padding: 0.25em;
+  background: none;
+  outline: 0.15em solid #f4ac45;
+  cursor: pointer;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+.search-form-wrapper button:hover {
+  background: #f4ac45;
 }
 
 .main-content {

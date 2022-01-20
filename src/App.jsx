@@ -8,6 +8,7 @@ import SingleBook from "./Components/Stateful/SingleBook";
 import Login from "./Components/Stateful/Login";
 import Register from "./Components/Stateful/Register";
 import Favorites from "./Components/Stateful/Favorites";
+import SearchResults from "./Components/Stateful/SearchResults";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/books/:id" element={<SingleBook />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/search" element={<SearchResults />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
