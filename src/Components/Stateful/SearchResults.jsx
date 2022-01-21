@@ -7,8 +7,10 @@ const SearchResults = () => {
   const searchResults = useSelector((state) => state.search.searchResults);
   const isError = useSelector((state) => state.search.error);
   const isLoading = useSelector((state) => state.search.loading);
+  const searchTerm = useSelector((state) => state.search.searchTerm);
   return (
     <main className="main-content">
+      <div>Results for "{searchTerm}":</div>
       <div className="books-container">
         {isLoading ? (
           <Loading />

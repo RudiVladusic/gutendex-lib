@@ -100,19 +100,19 @@ const SingleBook = () => {
               <p>Downloads: {download_count && download_count}</p>
             </div>
             <div className="book-info__user-actions-group">
-              <div className="book-info__read-online">
-                {formats && (
-                  <a
-                    href={formats["text/html"]}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Read online
-                  </a>
-                )}
-              </div>
+              {formats && (
+                <a
+                  href={formats["text/html"]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-default"
+                >
+                  Read online
+                </a>
+              )}
+
               <div
-                className="book-info__add-to-favorites"
+                className="btn-default remove-favorites"
                 onClick={() => {
                   isBookFavorited
                     ? dispatch(removeFromFavorites(singleBookInfo))

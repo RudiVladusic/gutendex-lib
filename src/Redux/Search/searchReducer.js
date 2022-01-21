@@ -25,6 +25,7 @@ const searchReducer = (state = initialState, action) => {
       };
     case SEARCH_BOOKS_SUCCESS:
       saveToLocal(GUTENDEX_SEARCH_RESULTS, action.payload);
+
       return {
         ...state,
         loading: false,
@@ -33,6 +34,7 @@ const searchReducer = (state = initialState, action) => {
       };
     case SEARCH_BOOKS_FAILURE:
       return {
+        ...state,
         loading: false,
         searchResults: [],
         error: action.payload,

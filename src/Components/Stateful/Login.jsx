@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAttempt } from "../../Redux/User/userActions";
+import {
+  loginAttempt,
+  loginFailure,
+  loginSuccess,
+} from "../../Redux/User/userActions";
 import ErrorModal from "../Presentational/ErrorModal";
 import AccountModal from "../Presentational/AccountModal";
+import validate from "../../Functions/validateLogin";
+import Loading from "../Presentational/Loading";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -13,8 +18,10 @@ const Login = () => {
     password: "",
   });
 
+  const userCredentials = useSelector((state) => state.user.credentials);
   const isLogged = useSelector((state) => state.user.isLoggedIn);
   const isError = useSelector((state) => state.user.isLoginError);
+  const isLoading = useSelector((state) => state.user.loading);
   let navigate = useNavigate();
   useEffect(() => {
     if (isLogged) {
@@ -23,20 +30,37 @@ const Login = () => {
     //eslint-disable-next-line
   }, [isLogged]);
 
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginAttempt(userLoginInfo));
+    const validationCheck = validate(userCredentials, userLoginInfo);
+    if (validationCheck) {
+      return setTimeout(() => {
+        dispatch(loginSuccess());
+      }, 2000);
+    } else {
+      return setTimeout(() => {
+        dispatch(loginFailure());
+      }, 2000);
+    }
+  };
+
   return (
     <main className="app-main login">
       <div className="form-wrapper login-form">
         <form
           onSubmit={(e) => {
-            e.preventDefault();
-            dispatch(loginAttempt(userLoginInfo));
+            handleLoginSubmit(e);
           }}
         >
-          {isError && (
-            <ErrorModal
-              errorMessage={`Wrong username and password combination`}
-            />
-          )}
+          <div className="form-group">
+            {isLoading && <Loading />}
+            {isError && (
+              <ErrorModal
+                errorMessage={`Wrong username and password combination`}
+              />
+            )}
+          </div>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input

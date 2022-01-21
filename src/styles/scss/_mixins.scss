@@ -1,0 +1,49 @@
+@mixin default-button($border-clr, $border-clr-after, $txt-clr, $bg-clr) {
+  position: relative;
+  outline: none;
+  border: none;
+  font-size: inherit;
+  color: $txt-clr;
+  background: $bg-clr;
+  text-decoration: none;
+  padding: 0.25em 1em;
+  text-transform: lowercase;
+
+  &::before {
+    position: absolute;
+    content: "";
+    outline: 0.15em solid $border-clr;
+    width: 100%;
+    height: 100%;
+    top: -15%;
+    left: -2.5%;
+    z-index: -1;
+    // transition: all 0.15s ease-in-out;
+    transition: top 0.25s ease-in-out, left 0.25s ease-in-out,
+      outline 0.5s ease-in-out 0.05s;
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    background: linear-gradient(45deg, $yellow-orange, $vivid-burgundy);
+    width: 100%;
+    height: 100%;
+    top: 15%;
+    left: 5%;
+    z-index: -1;
+    transition: top 0.25s ease-in-out, left 0.25s ease-in-out;
+  }
+
+  &:hover {
+    &::before,
+    &::after {
+      top: 0;
+      left: 0;
+    }
+
+    &::before {
+      outline: 0.15em solid darken($border-clr-after, 20%);
+    }
+  }
+}

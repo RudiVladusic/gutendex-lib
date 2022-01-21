@@ -9,11 +9,12 @@
 @import "form";
 @import "accountModal";
 @import "searchForm";
+@import "mixins";
 
 .main-content {
   width: $baseline-width;
   margin: 0 auto;
-  padding: 5em 0;
+  padding: 10em 0;
 }
 
 .pagination {
@@ -63,10 +64,10 @@
 
   &__article {
     width: 100%;
-    padding: 0.5em;
+    padding: 1.5em 0.5em;
     box-shadow: 0.15em 0.1em 0.25em rgba(0, 0, 0, 0.2);
     display: grid;
-    gap: 1em;
+    gap: 2em;
     place-items: center start;
     text-align: left;
     height: 25em;
@@ -76,26 +77,33 @@
       font-weight: 400;
       max-width: 20ch;
     }
-
-    a {
-      text-decoration: none;
-      color: $dark-jungle-green;
-      padding: 0.25em 0.75em;
-      border: 0.15em solid $yellow-orange;
-      border-radius: 0.5em;
-      text-transform: lowercase;
-      cursor: pointer;
-    }
   }
 
   &__article--details {
     display: flex;
     flex-flow: row wrap;
-    gap: 1em;
+    gap: 2em;
     place-items: center;
   }
 }
 
 .favorites-container {
   grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+}
+
+.btn-default {
+  @include default-button(
+      $dark-jungle-green,
+      $yellow-orange,
+      $dark-jungle-green,
+      $white
+    )
+    // text-decoration: none;
+    // color: $dark-jungle-green;
+    // padding: 0.25em 0.75em;
+    // border: 0.15em solid $yellow-orange;
+    // border-radius: 0.5em;
+    // text-transform: lowercase;
+    // cursor: pointer;
+;
 }

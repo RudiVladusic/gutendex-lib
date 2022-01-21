@@ -1,7 +1,7 @@
 import { saveToLocal } from "../../Functions/saveToLocal";
 import { addToFavs } from "../../Functions/addToFavs";
 import { getFromLocal } from "../../Functions/getFromLocal";
-import validate from "../../Functions/validateLogin";
+
 import {
   ADD_TO_FAVORITES,
   LOGIN_ATTEMPT,
@@ -12,6 +12,7 @@ import {
   REMOVE_FROM_FAVORITES,
   GUTENDEX_USER_CREDENTIALS,
   GUTENDEX_USER_FAVORITES,
+  LOGIN_SUCCESS,
 } from "./userTypes";
 import { removeFromFavs } from "../../Functions/removeFromFavs";
 
@@ -21,6 +22,7 @@ const initialState = {
   isLoginError: false,
   isRegisterError: false,
   isLoggedIn: false,
+  loading: false,
   credentials: checkForUser || {
     username: undefined,
     password: undefined,
@@ -41,12 +43,18 @@ const userReducer = (state = initialState, action) => {
         },
       };
     case LOGIN_ATTEMPT:
-      const checkLogin = validate(state.credentials, action.payload);
       return {
         ...state,
-        isLoggedIn: checkLogin,
-        isLoginError: checkLogin ? false : true,
+        loading: true,
+        isLoginError: false,
       };
+    case LOGIN_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        isLoggedIn: true,
+      };
+    }
     case REGISTER_FAILURE:
       return {
         ...state,
@@ -56,6 +64,8 @@ const userReducer = (state = initialState, action) => {
     case LOGIN_FAILURE:
       return {
         ...state,
+        isLoggedIn: false,
+        loading: false,
         isLoginError: true,
       };
 
@@ -63,6 +73,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
+        isLoginError: false,
       };
     case ADD_TO_FAVORITES:
       const newFavoriteAdded = addToFavs(state.favorites, action.payload);

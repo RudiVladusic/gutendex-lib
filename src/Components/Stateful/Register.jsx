@@ -20,26 +20,32 @@ const Register = () => {
     }
   });
 
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault();
+
+    if (userInformation.password !== userInformation.password_repeat) {
+      dispatch(registerFailure(`Passwords do not match`));
+    } else {
+      dispatch(
+        registerUser({
+          username: userInformation.username,
+          password: userInformation.password_repeat,
+        })
+      );
+    }
+  };
+
   return (
     <main className="app-main register">
       <div className="form-wrapper register-form">
         <form
           onSubmit={(e) => {
-            e.preventDefault();
-
-            if (userInformation.password !== userInformation.password_repeat) {
-              dispatch(registerFailure(`Passwords do not match`));
-            } else {
-              dispatch(
-                registerUser({
-                  username: userInformation.username,
-                  password: userInformation.password_repeat,
-                })
-              );
-            }
+            handleRegisterSubmit(e);
           }}
         >
-          {isError && <ErrorModal errorMessage={`Passwords do not match`} />}
+          <div className="form-group">
+            {isError && <ErrorModal errorMessage={`Passwords do not match`} />}
+          </div>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input

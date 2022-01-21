@@ -2,16 +2,22 @@ import {
   ADD_TO_FAVORITES,
   LOGIN_ATTEMPT,
   LOGIN_FAILURE,
+  LOGIN_SUCCESS,
   LOGOUT,
   REGISTER_FAILURE,
   REGISTER_USER,
   REMOVE_FROM_FAVORITES,
 } from "./userTypes";
 
-export const loginAttempt = (userInfo) => {
+export const loginAttempt = () => {
   return {
     type: LOGIN_ATTEMPT,
-    payload: userInfo,
+  };
+};
+
+export const loginSuccess = () => {
+  return {
+    type: LOGIN_SUCCESS,
   };
 };
 

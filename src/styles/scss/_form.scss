@@ -1,8 +1,6 @@
 .form-wrapper {
   display: grid;
-  // gap: 3em;
   place-items: center;
-  // background: $vivid-burgundy;
   width: clamp(30vw, 40em, 95vw);
   position: relative;
 
@@ -10,9 +8,17 @@
     display: grid;
     gap: 2em;
     place-items: start center;
-    // justify-content: start center;
     width: 100%;
     padding: 2.5em 0;
+
+    .error-modal,
+    .loading-spinner {
+      place-self: center;
+
+      p {
+        color: $white;
+      }
+    }
   }
 
   .form-group {

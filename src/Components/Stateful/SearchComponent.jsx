@@ -29,31 +29,34 @@ const SearchComponent = () => {
         onSubmit={(e) => {
           e.preventDefault();
           navigate("/search");
+          setShowSearchForm(!showSearchForm);
           if (isChecked) {
-            dispatch(fetchSearchBooks(apiStringTopic));
+            dispatch(fetchSearchBooks(apiStringTopic, searchString));
           } else {
-            dispatch(fetchSearchBooks(apiString));
+            dispatch(fetchSearchBooks(apiString, searchString));
           }
         }}
       >
-        <input
-          onChange={(e) => setSearchString(e.target.value)}
-          type="text"
-          value={searchString}
-          placeholder="Search"
-        />
-        <div className="checkbox-topic-container">
-          <label htmlFor="topic">By topic</label>
+        <div className="form-group-search">
           <input
-            type="checkbox"
-            name="search-topic"
-            id="search-topic"
-            disabled={searchString.length === 0 ? true : false}
-            onClick={(e) => {
-              setIsChecked(e.target.checked);
-            }}
-            value={isChecked}
+            onChange={(e) => setSearchString(e.target.value)}
+            type="text"
+            value={searchString}
+            placeholder="Search"
           />
+          <div className="checkbox-topic-container">
+            <label htmlFor="topic">By topic</label>
+            <input
+              type="checkbox"
+              name="search-topic"
+              id="search-topic"
+              disabled={searchString.length === 0 ? true : false}
+              onClick={(e) => {
+                setIsChecked(e.target.checked);
+              }}
+              value={isChecked}
+            />
+          </div>
         </div>
         <button>Search</button>
       </form>

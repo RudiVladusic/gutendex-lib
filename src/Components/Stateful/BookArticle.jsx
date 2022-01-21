@@ -25,8 +25,11 @@ const BookArticle = ({ books, removeButton }) => {
         <img src={formats["image/jpeg"]} alt="book cover" />
       )}
       <div className="books-container__article--details">
-        <Link to={`/books/${id}`}>Details</Link>
+        <Link to={`/books/${id}`} className="btn-default">
+          Details
+        </Link>
         <a
+          className="btn-default"
           href={formats["text/html"]}
           target="_blank"
           rel="noopener noreferrer"
