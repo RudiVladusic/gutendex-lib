@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { paginationReset } from "../../Redux/Pagination/paginationActions";
 import { fetchSearchBooks } from "../../Redux/Search/searchActions";
 
 const SearchComponent = () => {
@@ -30,10 +31,11 @@ const SearchComponent = () => {
           e.preventDefault();
           navigate("/search");
           setShowSearchForm(!showSearchForm);
+          dispatch(paginationReset());
           if (isChecked) {
-            dispatch(fetchSearchBooks(apiStringTopic, searchString));
+            dispatch(fetchSearchBooks(apiStringTopic, searchString, true));
           } else {
-            dispatch(fetchSearchBooks(apiString, searchString));
+            dispatch(fetchSearchBooks(apiString, searchString, false));
           }
         }}
       >

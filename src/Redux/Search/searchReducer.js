@@ -13,15 +13,18 @@ const initialState = {
   error: "",
   searchResults: getFromLocal(GUTENDEX_SEARCH_RESULTS) || [],
   searchTerm: getFromLocal(GUTENDEX_SEARCH_TERM) || "",
+  withTopic: false,
 };
 
 const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_BOOKS_REQUEST:
+      console.log(action);
       return {
         ...state,
         loading: true,
-        searchTerm: action.payload,
+        searchTerm: action.payload.searchTerm,
+        withTopic: action.payload.withTopic,
       };
     case SEARCH_BOOKS_SUCCESS:
       saveToLocal(GUTENDEX_SEARCH_RESULTS, action.payload);

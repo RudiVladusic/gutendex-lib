@@ -1,15 +1,5 @@
-@import "variables";
-@import "keyframes";
-@import "body";
-@import "loading";
-@import "setup";
-@import "nav";
-@import "book-info";
-@import "errorModal";
-@import "form";
-@import "accountModal";
-@import "searchForm";
-@import "mixins";
+@import "variables", "keyframes", "body", "loading", "setup", "nav", "book-info",
+  "errorModal", "form", "accountModal", "searchForm", "mixins", "helperClasses";
 
 .main-content {
   width: $baseline-width;
@@ -58,7 +48,7 @@
   display: grid;
   gap: 3em;
   grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
-  place-items: center;
+  place-items: start center;
   padding: 1em;
   margin: 0 auto;
 
@@ -70,7 +60,7 @@
     gap: 2em;
     place-items: center start;
     text-align: left;
-    height: 25em;
+    // height: 25em;
 
     h3,
     h4 {

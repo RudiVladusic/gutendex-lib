@@ -35,6 +35,8 @@
 body {
   background: #fbfffe;
   font-size: clamp(0.85em, 1.5vw, 1.1em);
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 .loading-spinner {
@@ -103,16 +105,22 @@ nav {
 }
 
 .mobile-navigation {
-  width: 100%;
+  width: 80%;
   height: 100vh;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  display: -ms-grid;
-  display: grid;
-  gap: 1em;
-  -ms-grid-columns: (1fr)[1];
-      grid-template-columns: repeat(1, 1fr);
+  background: #fbfffe;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 5em;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   place-items: center;
   z-index: 2;
   -webkit-transform: translateX(-100%);
@@ -121,13 +129,15 @@ nav {
   transition: -webkit-transform 0.25s ease;
   transition: transform 0.25s ease;
   transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+  -webkit-box-shadow: 0 0 0.15em rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 0.15em rgba(0, 0, 0, 0.5);
 }
 
 .mobile-navigation a {
   text-decoration: none;
   text-transform: lowercase;
   font-size: inherit;
-  color: #fbfffe;
+  color: #001514;
 }
 
 .mobile-nav-open {
@@ -318,15 +328,20 @@ nav {
   display: -ms-grid;
   display: grid;
   place-items: center;
-  width: clamp(30vw, 40em, 95vw);
+  width: clamp(30vw, 30em, 90vw);
   position: relative;
 }
 
 .form-wrapper form {
-  display: -ms-grid;
-  display: grid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: 2em;
-  place-items: start center;
+  place-items: center;
   width: 100%;
   padding: 2.5em 0;
 }
@@ -345,8 +360,10 @@ nav {
   display: -ms-grid;
   display: grid;
   gap: 0.5em;
-  padding: 0.5em;
   width: 80%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 3em;
+          flex: 1 1 3em;
 }
 
 .form-wrapper .form-group:focus-within label {
@@ -387,13 +404,15 @@ nav {
 .login-form {
   background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("/src/Images/login-form-bg.jpg") no-repeat center center/cover;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/Images/login-form-bg.jpg") no-repeat center center/cover;
-  position: relative;
-  border-radius: 0.5em;
 }
 
 .register-form {
   background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.25)), to(rgba(0, 0, 0, 0.5))), url("/src/Images/woman-reading-1.jpg") no-repeat center center/cover;
   background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.5)), url("/src/Images/woman-reading-1.jpg") no-repeat center center/cover;
+}
+
+.login-form,
+.register-form {
   position: relative;
   border-radius: 0.5em;
 }
@@ -401,10 +420,10 @@ nav {
 .login-form::before,
 .register-form::before {
   position: absolute;
-  width: clamp(35em, 30vw, 50em);
+  width: clamp(30em, 25vw, 45em);
   height: 45em;
   content: "";
-  left: -15%;
+  left: -5em;
   z-index: -1;
   background: linear-gradient(45deg, #f4ac45, #a61c3c);
 }
@@ -412,24 +431,13 @@ nav {
 .login-form::after,
 .register-form::after {
   position: absolute;
-  width: clamp(35em, 30vw, 50em);
-  height: 45em;
+  width: clamp(30em, 25vw, 45em);
+  height: 40em;
   content: "";
-  right: -15%;
+  right: -5em;
   z-index: -2;
-  top: -10%;
-  border: 0.15em solid rgba(107, 57, 57, 0.5);
-}
-
-@media (max-width: 768px) {
-  .login-form::after,
-  .register-form::after {
-    display: none;
-  }
-}
-
-.register-form::after {
-  top: -3%;
+  top: -3em;
+  border: 0.15em solid rgba(0, 0, 0, 0.25);
 }
 
 .account-modal {
@@ -558,6 +566,23 @@ button:hover {
           flex: 1;
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.background-darken {
+  position: relative;
+}
+
+.background-darken::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+}
+
 .main-content {
   width: clamp(80vw, 50em, 93vw);
   margin: 0 auto;
@@ -609,7 +634,7 @@ button:hover {
   gap: 3em;
   -ms-grid-columns: (minmax(15em, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
-  place-items: center;
+  place-items: start center;
   padding: 1em;
   margin: 0 auto;
 }
@@ -624,7 +649,6 @@ button:hover {
   gap: 2em;
   place-items: center start;
   text-align: left;
-  height: 25em;
 }
 
 .books-container__article h3,
@@ -671,8 +695,8 @@ button:hover {
   top: -15%;
   left: -2.5%;
   z-index: -1;
-  -webkit-transition: top 0.25s ease-in-out, left 0.25s ease-in-out, outline 0.5s ease-in-out 0.05s;
-  transition: top 0.25s ease-in-out, left 0.25s ease-in-out, outline 0.5s ease-in-out 0.05s;
+  -webkit-transition: top 0.15s ease-in-out, left 0.15s ease-in-out, outline 0.5s ease-in-out 0.05s;
+  transition: top 0.15s ease-in-out, left 0.15s ease-in-out, outline 0.5s ease-in-out 0.05s;
 }
 
 .btn-default::after {
@@ -684,8 +708,8 @@ button:hover {
   top: 15%;
   left: 5%;
   z-index: -1;
-  -webkit-transition: top 0.25s ease-in-out, left 0.25s ease-in-out;
-  transition: top 0.25s ease-in-out, left 0.25s ease-in-out;
+  -webkit-transition: top 0.15s ease-in-out, left 0.15s ease-in-out;
+  transition: top 0.15s ease-in-out, left 0.15s ease-in-out;
 }
 
 .btn-default:hover::before, .btn-default:hover::after {

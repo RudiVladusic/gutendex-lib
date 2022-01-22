@@ -10,17 +10,53 @@ const Navigation = () => {
   const userName = useSelector((state) => state.user.credentials.username);
   const dispatch = useDispatch();
 
+  const navigationLinkStrings = ["about", "favorites"];
+  const bodyClasses = ["overflow-hidden", "background-darken"];
+
+  const classListToggle = (classes) => {
+    classes.forEach((classItem) => {
+      return document.body.classList.toggle(classItem);
+    });
+  };
+
+  const handleMobileNavBarOpen = () => {
+    classListToggle(bodyClasses);
+
+    if (isMobileNavOpen) {
+      setIsMobileNavOpen(false);
+    } else {
+      setIsMobileNavOpen(true);
+    }
+  };
+
+  const StaticNavbarComponent = () => {
+    return navigationLinkStrings.map((item, index) => {
+      return (
+        <Link
+          onClick={() => {
+            handleMobileNavBarOpen();
+          }}
+          key={index}
+          to={`/${item}`}
+        >
+          {item}
+        </Link>
+      );
+    });
+  };
+
   return (
     <nav>
       <div className="navbar-wrapper">
         <header className="navbar-banner">
-          <h2>Gutendex-lib</h2>
+          <Link to="/">Gutendex-lib</Link>
         </header>
+
         <SearchComponent />
         <div className="desktop-navigation">
-          <Link to="/">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/favorites">Favorites</Link>
+
           <Link
             to={isLogged ? "/" : "/login"}
             onClick={() => {
@@ -37,16 +73,19 @@ const Navigation = () => {
               : "mobile-navigation"
           }
         >
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/favorites">Favorites</Link>
-          <Link to="/login">Login</Link>
+          <StaticNavbarComponent />
+          <Link
+            to={isLogged ? "/" : "/login"}
+            onClick={() => {
+              isLogged && dispatch(logout());
+              handleMobileNavBarOpen();
+            }}
+          >
+            {isLogged ? `Logout (${userName})` : "Login"}
+          </Link>
         </div>
 
-        <div
-          className="burger"
-          onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
-        >
+        <div className="burger" onClick={() => handleMobileNavBarOpen()}>
           <div className="burger__bar"></div>
           <div className="burger__bar"></div>
           <div className="burger__bar"></div>

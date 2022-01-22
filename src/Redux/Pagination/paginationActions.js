@@ -1,13 +1,37 @@
-import { PREVIOUS_PAGE, NEXT_PAGE } from "./paginationTypes";
+import {
+  HOME_PREVIOUS_PAGE,
+  HOME_NEXT_PAGE,
+  SEARCH_NEXT_PAGE,
+  SEARCH_PREVIOUS_PAGE,
+  PAGINATION_RESET,
+} from "./paginationTypes";
 
-export const previousPage = () => {
+export const homePreviousPage = () => {
   return {
-    type: PREVIOUS_PAGE,
+    type: HOME_PREVIOUS_PAGE,
   };
 };
 
-export const nextPage = () => {
+export const homeNextPage = () => {
   return {
-    type: NEXT_PAGE,
+    type: HOME_NEXT_PAGE,
+  };
+};
+
+export const searchNextPage = () => {
+  return {
+    type: SEARCH_NEXT_PAGE,
+  };
+};
+
+export const searchPreviousPage = () => {
+  return {
+    type: SEARCH_PREVIOUS_PAGE,
+  };
+};
+
+export const paginationReset = () => {
+  return {
+    type: PAGINATION_RESET,
   };
 };

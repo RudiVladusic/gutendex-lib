@@ -6,10 +6,10 @@ import {
 
 import axios from "axios";
 
-export const searchBooksRequest = (searchTerm) => {
+export const searchBooksRequest = (searchTerm, withTopic) => {
   return {
     type: SEARCH_BOOKS_REQUEST,
-    payload: searchTerm,
+    payload: { searchTerm: searchTerm, withTopic: withTopic },
   };
 };
 
@@ -27,9 +27,9 @@ export const searchBooksSuccess = (books) => {
   };
 };
 
-export const fetchSearchBooks = (apiString, searchString) => {
+export const fetchSearchBooks = (apiString, searchString, withTopic) => {
   return (dispatch) => {
-    dispatch(searchBooksRequest(searchString));
+    dispatch(searchBooksRequest(searchString, withTopic));
     axios
       .get(apiString)
       .then((response) => {
