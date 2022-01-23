@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <main className="app-main login">
+    <main className="main-content login">
       <div className="form-wrapper login-form">
         <form
           onSubmit={(e) => {

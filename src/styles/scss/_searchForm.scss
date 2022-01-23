@@ -1,30 +1,42 @@
 .search-form-wrapper {
-  outline: 0.15em solid $dark-jungle-green;
-  display: flex;
-  place-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0.25em 0;
+  padding: 0.5em;
+  -webkit-tap-highlight-color: transparent;
+  @media (min-width: 768px) {
+    cursor: pointer;
+  }
 }
 
 .search-trigger {
   position: relative;
+  display: flex;
+  gap: 1em;
+  place-items: center;
+  color: $white;
+  svg {
+    color: $yellow-orange;
+  }
 }
 
 .search-form {
   display: flex;
   justify-content: space-between;
+  place-items: center;
+  gap: 1em;
   position: absolute;
   top: 200%;
-  left: 0;
-  transform: scale(0);
+  left: 50%;
+  transform: scale(1, 0) translate(-50%, 0%);
+  transform-origin: top;
   transition: all 0.25s ease-in-out;
-  width: clamp(30vw, 15em, 80vw);
-  padding: 0.25em 0.5em;
+  width: clamp(30vw, 45em, 95vw);
+  padding: 1em 0.5em;
+  background: $white;
+  z-index: 1;
+  box-shadow: 0.15em 0.15em 0.25em rgba(0, 0, 0, 0.25);
 }
 
 .open-form {
-  transform: scale(1);
+  transform: scale(1, 1) translate(-50%, 0%);
 }
 
 .checkbox-topic-container {
@@ -32,52 +44,54 @@
   gap: 0.5em;
   line-height: 1.1;
   place-items: center;
+  padding: 0 0.25em;
 
-  input {
+  input[type="checkbox"] {
     outline: none;
     border: none;
     cursor: pointer;
     outline: 0.15em solid $yellow-orange;
+    transition: all 0.25s ease;
+    width: 1.25em;
+    height: 1.25em;
     appearance: none;
-    width: 1em;
-    height: 1em;
-    transition: all 0.5s ease;
 
     &:checked {
       background: $yellow-orange;
-      padding: 0.5em;
     }
+
     &:disabled {
       cursor: not-allowed;
-      outline: 0.15em solid rgba(0, 0, 0, 0.25);
+      outline: 0.15em solid rgba(0, 0, 0, 0.1);
     }
-  }
-}
-
-button {
-  outline: none;
-  border: none;
-  padding: 0.25em;
-  background: none;
-  outline: 0.15em solid $yellow-orange;
-  cursor: pointer;
-  transition: all 0.25s ease-in-out;
-  &:hover {
-    background: $yellow-orange;
   }
 }
 
 .form-group-search {
   display: flex;
   gap: 1em;
-  flex-direction: column;
+  flex-flow: row wrap;
+  place-items: center;
+  width: calc(100% / 1.25);
 
   input[type="text"] {
-    outline: none;
     border: none;
     padding: 0.25em;
     font-size: inherit;
-    outline: 0.15em solid $yellow-orange;
-    flex: 1;
+    width: 80%;
+    outline: none;
+    box-shadow: 0 0.1em 0 $white;
+    transition: box-shadow 0.25s ease-in-out;
+    transform-origin: left;
+
+    &:focus-within {
+      box-shadow: 0 0.1em 0 $yellow-orange;
+    }
   }
+}
+
+.search-btn {
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  cursor: pointer;
 }

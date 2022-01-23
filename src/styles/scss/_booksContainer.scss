@@ -1,0 +1,40 @@
+.books-container {
+  display: grid;
+  gap: 3em;
+  grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+  place-items: start center;
+  padding: 1em;
+  margin: 0 auto;
+
+  &__article {
+    width: 100%;
+    padding: 1.5em 0.5em;
+    box-shadow: 0.15em 0.1em 0.25em rgba(0, 0, 0, 0.2);
+    display: grid;
+    gap: 2em;
+    place-items: center start;
+    text-align: left;
+    height: 25em;
+
+    h3,
+    h4 {
+      font-weight: 400;
+      max-width: 20ch;
+    }
+
+    img {
+      height: 15em;
+    }
+  }
+
+  &__article--details {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2em;
+    place-items: center;
+  }
+}
+
+.favorites-container {
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+}

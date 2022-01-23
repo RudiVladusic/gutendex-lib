@@ -1,0 +1,12 @@
+.main-content {
+  width: $baseline-width;
+  margin: 0 auto;
+  padding: 10em 0;
+  min-height: calc(100vh + 10em);
+}
+
+.login,
+.register {
+  display: grid;
+  place-items: start center;
+}

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { fetchBooks } from "../../Redux/Books/bookActions";
 import { fetchSearchBooks } from "../../Redux/Search/searchActions";
 import {
@@ -8,6 +8,12 @@ import {
   searchNextPage,
   searchPreviousPage,
 } from "../../Redux/Pagination/paginationActions";
+import { BASE_BOOKS_ENDPOINT } from "../../Endpoints/baseBooksEndpoint";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowAltCircleLeft,
+  faArrowAltCircleRight,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Pagination = ({ homePage, searchPage }) => {
   const dispatch = useDispatch();
@@ -20,24 +26,28 @@ const Pagination = ({ homePage, searchPage }) => {
   );
 
   const isWithTopic = useSelector((state) => state.search.withTopic);
-  const homeComponentApiString = `https://gutendex.com/books/?page=${homePageCount}`;
-  const searchComponentApiString = `https://gutendex.com/books/?search=${searchString}&page=${searchPageCount}`;
-  const searchComponentWithTopicString = `https://gutendex.com/books/?topic=${searchString}&page=${searchPageCount}`;
+  const homeComponentApiString = `${BASE_BOOKS_ENDPOINT}?page=${homePageCount}`;
+  const searchComponentApiString = `${BASE_BOOKS_ENDPOINT}?search=${searchString}&page=${searchPageCount}`;
+  const searchComponentWithTopicString = `${BASE_BOOKS_ENDPOINT}?topic=${searchString}&page=${searchPageCount}`;
+
+  const didMount = useRef(false);
+
   useEffect(() => {
     if (homePage) {
       dispatch(fetchBooks(homeComponentApiString));
     }
-
     //  eslint-disable-next-line
   }, [homePageCount]);
 
   useEffect(() => {
-    if (searchPage && isWithTopic) {
+    if (searchPage && isWithTopic && didMount.current) {
       dispatch(
         fetchSearchBooks(searchComponentWithTopicString, searchString, true)
       );
-    } else if (searchPage) {
+    } else if (searchPage && !isWithTopic && didMount.current) {
       dispatch(fetchSearchBooks(searchComponentApiString, searchString, false));
+    } else {
+      didMount.current = true;
     }
 
     // eslint-disable-next-line
@@ -80,7 +90,7 @@ const Pagination = ({ homePage, searchPage }) => {
             searchPage && handlePageChange("searchPagePrevious");
           }}
         >
-          Previous page
+          <FontAwesomeIcon icon={faArrowAltCircleLeft} /> Previous page
         </button>
 
         <button
@@ -89,7 +99,7 @@ const Pagination = ({ homePage, searchPage }) => {
             searchPage && handlePageChange("searchPageNext");
           }}
         >
-          next page
+          next page <FontAwesomeIcon icon={faArrowAltCircleRight} />
         </button>
       </div>
       <div className="pagination__info">

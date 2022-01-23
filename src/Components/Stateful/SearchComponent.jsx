@@ -4,15 +4,30 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { paginationReset } from "../../Redux/Pagination/paginationActions";
 import { fetchSearchBooks } from "../../Redux/Search/searchActions";
+import { BASE_BOOKS_ENDPOINT } from "../../Endpoints/baseBooksEndpoint";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const SearchComponent = () => {
   const [searchString, setSearchString] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const apiString = `https://gutendex.com/books/?search=${searchString}`;
-  const apiStringTopic = `https://gutendex.com/books/?topic=${searchString}`;
+  const apiString = `${BASE_BOOKS_ENDPOINT}?search=${searchString}&page=1`;
+  const apiStringTopic = `${BASE_BOOKS_ENDPOINT}?topic=${searchString}&page=1`;
   const [showSearchForm, setShowSearchForm] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleSearchFunction = (e) => {
+    e.preventDefault();
+    navigate("/search");
+    setShowSearchForm(!showSearchForm);
+    dispatch(paginationReset());
+    if (isChecked) {
+      dispatch(fetchSearchBooks(apiStringTopic, searchString, true));
+    } else {
+      dispatch(fetchSearchBooks(apiString, searchString, false));
+    }
+  };
 
   return (
     <div className="search-form-wrapper">
@@ -22,21 +37,13 @@ const SearchComponent = () => {
           setShowSearchForm(!showSearchForm);
         }}
       >
-        Trigger
+        search <FontAwesomeIcon icon={faSearch} />
       </div>
 
       <form
         className={showSearchForm ? `search-form open-form` : `search-form`}
         onSubmit={(e) => {
-          e.preventDefault();
-          navigate("/search");
-          setShowSearchForm(!showSearchForm);
-          dispatch(paginationReset());
-          if (isChecked) {
-            dispatch(fetchSearchBooks(apiStringTopic, searchString, true));
-          } else {
-            dispatch(fetchSearchBooks(apiString, searchString, false));
-          }
+          handleSearchFunction(e);
         }}
       >
         <div className="form-group-search">
@@ -44,8 +51,9 @@ const SearchComponent = () => {
             onChange={(e) => setSearchString(e.target.value)}
             type="text"
             value={searchString}
-            placeholder="Search"
+            placeholder="Search for books..."
           />
+
           <div className="checkbox-topic-container">
             <label htmlFor="topic">By topic</label>
             <input
@@ -60,7 +68,8 @@ const SearchComponent = () => {
             />
           </div>
         </div>
-        <button>Search</button>
+
+        <button className="btn-default search-btn">Search</button>
       </form>
     </div>
   );

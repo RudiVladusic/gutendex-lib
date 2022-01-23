@@ -1,7 +1,7 @@
 .form-wrapper {
   display: grid;
   place-items: center;
-  width: clamp(30vw, 30em, 90vw);
+  width: clamp(30vw, 25em, 75vw);
   position: relative;
 
   form {
@@ -82,20 +82,20 @@
   border-radius: 0.5em;
   &::before {
     position: absolute;
-    width: clamp(30em, 25vw, 45em);
+    width: 100%;
     height: 45em;
     content: "";
-    left: -5em;
+    left: -15%;
     z-index: -1;
     background: linear-gradient(45deg, $yellow-orange, $vivid-burgundy);
   }
 
   &::after {
     position: absolute;
-    width: clamp(30em, 25vw, 45em);
+    width: 100%;
     height: 40em;
     content: "";
-    right: -5em;
+    right: -15%;
     z-index: -2;
     top: -3em;
     border: 0.15em solid rgba(0, 0, 0, 0.25);

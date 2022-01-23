@@ -9,6 +9,7 @@ import Login from "./Components/Stateful/Login";
 import Register from "./Components/Stateful/Register";
 import Favorites from "./Components/Stateful/Favorites";
 import SearchResults from "./Components/Stateful/SearchResults";
+import Footer from "./Components/Presentational/Footer";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/search" element={<SearchResults />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

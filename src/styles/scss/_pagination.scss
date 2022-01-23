@@ -1,0 +1,30 @@
+.pagination {
+  &__controls {
+    padding: 1em;
+    display: flex;
+    gap: 1em;
+    place-items: center;
+
+    button {
+      border: none;
+      background: none;
+      padding: 0.5em 1em;
+      text-transform: lowercase;
+      cursor: pointer;
+      font-size: inherit;
+      outline: 0.15em solid darken($yellow-orange, 20%);
+      color: $dark-jungle-green;
+
+      svg {
+        color: darken($yellow-orange, 20%);
+      }
+    }
+  }
+
+  &__info {
+    padding: 0 1em;
+    p {
+      padding: 0 0.5em;
+    }
+  }
+}

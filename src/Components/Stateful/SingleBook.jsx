@@ -7,6 +7,9 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from "../../Redux/User/userActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
 const SingleBook = () => {
   const { id } = useParams();
@@ -107,12 +110,16 @@ const SingleBook = () => {
                   rel="noopener noreferrer"
                   className="btn-default"
                 >
-                  Read online
+                  Read online <FontAwesomeIcon icon={faBook} />
                 </a>
               )}
 
               <div
-                className="btn-default remove-favorites"
+                className={
+                  isBookFavorited
+                    ? `btn-default remove-favorites`
+                    : `btn-default`
+                }
                 onClick={() => {
                   isBookFavorited
                     ? dispatch(removeFromFavorites(singleBookInfo))
@@ -120,6 +127,9 @@ const SingleBook = () => {
                 }}
               >
                 {isBookFavorited ? `Remove from favorites` : `Add to favorites`}
+                <FontAwesomeIcon
+                  icon={isBookFavorited ? faTrashAlt : faPlusCircle}
+                />
               </div>
             </div>
           </aside>

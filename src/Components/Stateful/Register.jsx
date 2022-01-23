@@ -36,7 +36,7 @@ const Register = () => {
   };
 
   return (
-    <main className="app-main register">
+    <main className="main-content register">
       <div className="form-wrapper register-form">
         <form
           onSubmit={(e) => {
@@ -82,7 +82,7 @@ const Register = () => {
           <div className="form-group">
             <label htmlFor="password">Repeat password</label>
             <input
-              type="password-repeat"
+              type="password"
               name="password-repeat"
               id="password-repeat"
               required={true}

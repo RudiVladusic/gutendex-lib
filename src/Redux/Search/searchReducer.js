@@ -19,7 +19,6 @@ const initialState = {
 const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_BOOKS_REQUEST:
-      console.log(action);
       return {
         ...state,
         loading: true,
@@ -28,7 +27,6 @@ const searchReducer = (state = initialState, action) => {
       };
     case SEARCH_BOOKS_SUCCESS:
       saveToLocal(GUTENDEX_SEARCH_RESULTS, action.payload);
-
       return {
         ...state,
         loading: false,

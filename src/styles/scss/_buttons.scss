@@ -1,0 +1,21 @@
+.btn-default {
+  @include default-button(
+    $dark-jungle-green,
+    $yellow-orange,
+    $dark-jungle-green,
+    $white,
+    $yellow-orange,
+    $vivid-burgundy
+  );
+}
+
+.remove-favorites {
+  @include default-button(
+    $vivid-burgundy,
+    $vivid-burgundy,
+    $vivid-burgundy,
+    $white,
+    $vivid-burgundy,
+    $vivid-burgundy
+  );
+}
